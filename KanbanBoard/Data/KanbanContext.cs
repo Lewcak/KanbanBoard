@@ -11,8 +11,17 @@ namespace KanbanBoard.Data
         }
         public DbSet<Board> Boards { get; set; }
         public DbSet<Column> Columns { get; set; }
-        public DbSet<TaskItem> Items { get; set; }
+        public DbSet<TaskItem> TaskItems { get; set; }
 
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder) // for delting entire boards 
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<Board>().HasMany(b => b.Columns).WithOne().OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Column>().HasMany(b => b.Tasks).WithOne().OnDelete(DeleteBehavior.Cascade);
+
+        }
     }
 }
