@@ -27,7 +27,7 @@ namespace KanbanBoard.Controllers
         [HttpGet("{id}")] // get board by ID, with all its columns and tasks 
         public async Task<ActionResult<Board>> GetBoard(int id)
         {
-            var board = await _context.Boards.Include(c => c.Columns).ThenInclude(t => t.Tasks).FirstOrDefaultAsync(x => x.Id == id);
+            var board = await _context.Boards.Include(c => c.Columns).ThenInclude(t => t.Tasks).FirstOrDefaultAsync(b => b.Id == id);
 
             if (board == null)
             {
@@ -60,7 +60,15 @@ namespace KanbanBoard.Controllers
             {
                 return BadRequest();
             }
-            _context.Entry(board).State = EntityState.Modified;
+
+            var boardFromDb = await _context.Boards.FindAsync(id);
+
+            if (boardFromDb == null)
+            {
+                return NotFound();
+            }
+
+            boardFromDb.Name = board.Name;
 
             try
             {
@@ -68,15 +76,9 @@ namespace KanbanBoard.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Boards.Any(e => e.Id == id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
+
             return NoContent();
         }
 
