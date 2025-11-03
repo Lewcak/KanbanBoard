@@ -1,47 +1,47 @@
-# KanbanBoard
+# Kanban Board 
 
-Features
+This is a Kanban board application, built with an ASP.NET Core backend and an Angular frontend. It is a Web app for managing boards, columns, and tasks, including all logic for drag-and-drop re-ordering of tasks.
 
-    Created a backend API that serves data to angular frontend.
+---
 
-    Frontend: The UI is built with Angular and TypeScript
+## Features
 
-    Drag-and-Drop Interface: Will be using the Angular CDK to allow users to move tasks between columns and re-order them.
+* **Full-Stack Application:** A  backend API (ASP.NET Core) serves data to a single-page application (Angular).
+* **Frontend UI:** The user interface is built with **Angular** and **TypeScript**.
+* **Drag-and-Drop:** Utilizes the **Angular CDK** to allow users to select taskt and move them between columns to re-order them.
+* **Backend:**
+    * Full CRUD for boards, columns, and tasks.
+    * New boards are automatically created with "To Do", "In Progress", and "Done" columns.
+    * A dedicated `/api/tasks/move` endpoint handles all complex re-ordering logic.
+* **Data Integrity:** The database is configured with **Cascade Deletes**, so deleting a board automatically clears all its child columns and tasks.
 
-    Full CRUD for boards, columns, and tasks.
+---
 
-    New boards are automatically created with "To Do", "In Progress", and "Done" columns.
+## Tech Stack
 
-    Dedicated /api/tasks/move endpoint handles all re-ordering logic.
+* **Frontend:** Angular, TypeScript, Angular CDK (for Drag & Drop), HTML/CSS
+* **Backend:** ASP.NET Core Web API, C#
+* **Database:** MS SQL Server, Entity Framework Core (ORM)
 
-    The database is configured with Cascade Deletes, so deleting a board automatically clears all its child columns and tasks.
+---
 
-Tech Stack
+## How to Run
 
-    FrontEnd: Angular, TypeScript, Angular CDK (for Drag & Drop), HTML/CSS
-    Backend: ASP.NET Core Web API, C#
-    Database: MS SQL Server, Entity Framework Core (ORM)
+### Backend (ASP.NET Core)
 
-How to Run
+1.  Clone this repository.
+2.  Open the `appsettings.json` file.
+3.  Change the `DefaultConnection` string to point to your local MS SQL Server instance.
+4.  Open a terminal in the project root and run the database migrations:
+    ```bash
+    dotnet ef database update
+    ```
+5.  Run the application:
+    ```bash
+    dotnet run
+    ```
+6.  The API will be running. Check your console for the `localhost` URL.
 
-    Backend (ASP.NET Core)
+### 2. Frontend (Angular)
 
-        Clone this repository and open the backend project folder.
-
-        Open the appsettings.json file.
-
-        Change the DefaultConnection string to point to your local MS SQL Server instance.
-
-        Open a terminal in the project root and run the database migrations:
-
-        dotnet ef database update
-
-        Run the application:
-        
-        dotnet run
-
-        Check console for localhost where it is running
-
-    Frontend Angular
-
-        This is currently not completed
+* This part of the project is currently in development.
