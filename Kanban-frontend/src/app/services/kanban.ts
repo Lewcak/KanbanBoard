@@ -64,7 +64,32 @@ export class Kanban {
 
   // Task Service Methods
 
-  
+  // Create a task 
+  postTask(task: Task) {
+    return this.http.post<Task>(`${this.apiUrl}/Tasks`, task)
+  }
+
+  // Get task by ID
+  getTask(id: number) {
+    return this.http.get<Task>(`${this.apiUrl}/Tasks/${id}`)
+  }
+
+  // Edit Task by ID
+  putTask(task: Task, id: number) {
+    return this.http.put<Task>(`${this.apiUrl}/Tasks/${id}`, task)
+  }
+
+  // Delete Column by ID
+  deleteTask(id: number) {
+    return this.http.delete<Task>(`${this.apiUrl}/Tasks/${id}`)
+  }
+
+  // Move task 
+  moveTask(request: MoveTaskRequest) {
+    return this.http.put<MoveTaskRequest>(`${this.apiUrl}/Tasks/move`, request)
+  }
+
+
 
 }
 
