@@ -41,9 +41,30 @@ export class Kanban {
 
   // Column Service Methods
 
+  // Create a column 
+  postColumn(column: Column) {
+    return this.http.post<Column>(`${this.apiUrl}/Columns`, column)
+  }
+
+  // Get column by ID
+  getColumn(id: number) {
+    return this.http.get<Column>(`${this.apiUrl}/Columns/${id}`)
+  }
+
+  // Edit Column by ID
+  putColumn(column: Column, id: number) {
+    return this.http.put<Column>(`${this.apiUrl}/Columns/${id}`, column)
+  }
+
+  // Delete Column by ID
+  deleteColumn(id: number) {
+    return this.http.delete<Column>(`${this.apiUrl}/Columns/${id}`)
+  }
 
 
+  // Task Service Methods
 
+  
 
 }
 
