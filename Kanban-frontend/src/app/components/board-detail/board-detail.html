@@ -1,49 +1,67 @@
-<div>
+<main>
     @if (board) {
-    <h1>{{ board.name }}</h1>
-    <button (click)="addingColumn = true">New Board</button>
+    <header>
+        <h1>{{ board.name }}</h1>
+    </header>
 
-    @if (addingColumn === true) {
-    <input #columnName type="text" />
-    <button (click)="createColumn(columnName.value)">Save</button>
-    <button (click)="addingColumn = false">Cancel</button>
-    }
-    
-    @for (column of board.columns; track column.id) {
-    <div>
-        @if (editingColumnId === column.id) {
-        <input #editColumnName type="text" />
-        <button (click)="editColumn(column, editColumnName.value)">Save</button>
-        <button (click)="editingColumnId = null">Cancel</button>
-        } @else {
-        <h2>
-            {{ column.name }}
-            <button (click)="editingColumnId = column.id">Edit</button>
-            <button (click)="deleteColumn(column.id)">Delete</button>
-            <br>
-            <button (click)="addTaskToColumnId = column.id">New Task</button>
-        </h2>
+    <section class="columns-container">
+
+        @for (column of board.columns; track column.id) {
+        <div class="column">
+
+            <div class="column-header">
+                <h2>{{ column.name }}</h2>
+                @if (editingColumnId === column.id) {
+                <input #editColumnName type="text" placeholder="New Column Name" />
+                <button (click)="editColumn(column, editColumnName.value)" class="btn-save">Save</button>
+                <button (click)="editingColumnId = null" class="btn-cancel">Cancel</button>
+                } @else {
+                <button (click)="addTaskToColumnId = column.id" class="btn-new">New Task</button>
+                <button (click)="editingColumnId = column.id" class="btn-edit">Edit</button>
+                <button (click)="deleteColumn(column.id)" class="btn-delete">Delete</button>
+                }
+                <br><br>
+                <div class="addNewTaskForm">
+                    @if (addTaskToColumnId === column.id) {
+                    <br><br>
+                    <input #taskName type="text" placeholder="New Task Name" />
+                    <br><br>
+                    <button (click)="createTask(taskName.value)" class="btn-save">Save</button>
+                    <button (click)="addTaskToColumnId = null" class="btn-cancel">Cancel</button>
+                    
+                    }
+                </div>
+            </div>
+            
+            <div class="task-container">
+                @for (task of column.tasks; track task.id) {
+                <div class="task-card">
+                    <h3>{{ task.title }}</h3>
+                    @if (editingTaskId === task.id) {
+                    <input #editTaskName type="text" placeholder="Task Name">
+                    <button (click)="editTask(task, editTaskName.value)" class="btn-save">Save</button>
+                    <button (click)="editingTaskId = null" class="btn-cancel">Cancel</button>
+                    } @else {
+                    <button (click)="editingTaskId = task.id" class="btn-edit">Edit</button>
+                    <button (click)="deleteTask(task.id)" class="btn-delete">Delete</button>
+                    <br>
+                    }
+                </div>
+                }
+            </div>
+
+            
+        </div>
         }
-
-        @if (addTaskToColumnId === column.id) {
-        <input #taskName type="text" />
-        <button (click)="createTask(taskName.value)">Save</button>
-        <button (click)="addTaskToColumnId = null">Cancel</button>
-        }
-
-        @for (task of column.tasks; track task.id) {
-        @if (editingTaskId === task.id) {
-        <input #editTaskName type="text" placeholder="Task Name">
-        <button (click)="editTask(task, editTaskName.value)">Save</button>
-        <button (click)="editingTaskId = null">Cancel</button>
-        } @else {
-        {{ task.title }}
-        <button (click)="editingTaskId = task.id">Edit</button>
-        <button (click)="deleteTask(task.id)">Delete</button>
+    </section>
+    <button (click)="addingColumn = true" class="btn-new">New Column</button>
+    <div class="addColumnForm">
+        @if (addingColumn === true) {
+        <input #columnName type="text" placeholder="New Column Name" />
         <br>
-        }
+        <button (click)="createColumn(columnName.value)" class="btn-save">Save</button>
+        <button (click)="addingColumn = false" class="btn-cancel">Cancel</button>
         }
     </div>
     }
-    }
-</div>
+</main>

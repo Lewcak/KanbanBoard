@@ -1,0 +1,121 @@
+main {
+    
+
+    
+}
+
+header {
+    padding:10px;
+    
+}
+
+input {
+    border-radius: 15px;
+    border: 2px solid black;
+    height: 20px;
+    width: fit-content;
+    text-align: center;
+}
+
+button {
+    
+    color: white;
+    border-radius: 20px;
+    margin:4px;
+}
+
+.btn-edit {
+    background-color:blue;
+    
+}
+
+.btn-delete {
+    background-color: red;
+}
+
+.btn-save {
+    background-color: green;
+}
+ 
+.btn-new {
+    background-color: green;
+   
+}
+
+.btn-cancel {
+    background-color: cornflowerblue;
+}
+
+/* Columns */
+
+.columns-container {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  padding: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+
+
+  
+
+  min-height: 65vh;
+}
+
+.column-header {
+    text-align: center;    
+    padding: 5px;
+    margin:10px;
+}
+
+.column {
+    border: 2px solid white;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 100%;
+    background-color: #343e42;
+    border-radius: 10px;
+    
+}
+
+.addColumnForm {
+
+    padding: 0px;
+    background-color: #343e42;
+    
+}
+
+
+
+/* Tasks */
+
+.task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 25px;
+    text-align: center;   
+    
+    
+}
+
+
+.addNewTaskForm {
+    padding:0px;
+    background-color: #543d8f;
+    padding-left:10px;
+    border-radius: 50px;
+    
+    border: 2px solid white;
+    
+}
+
+.task-card {
+    border: 2px solid white;
+    padding: 15px;
+    background-color: #543d8f;
+
+    border-radius: 50px;
+    
+    
+}
