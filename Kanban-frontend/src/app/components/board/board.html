@@ -1,2 +1,20 @@
-<app-column>board works!</app-column>
-<app-card>column works!</app-card>
+<div>
+    <h1>All Boards</h1>
+    @for (board of boards; track board.id) {
+    <p>
+        @if (editingBoardId === board.id) {
+            <input #editName type="text" [value]="board.name"/>
+            <button (click)="saveBoard(board.id, editName.value)">Save</button>
+            <button (click)="editingBoardId = null">Cancel</button>
+        } @else {
+            <a [routerLink]="['/boards', board.id]">{{ board.name }}</a>
+            <button (click)="editingBoardId = board.id">Edit</button>
+            <button (click)="deleteBoard(board.id)">Delete</button>
+        }
+
+    </p>
+    }
+</div>
+
+<input #boardName type="text" placeholder="Board name" />
+<button (click)="createBoard(boardName.value)">Create Board</button>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BoardComponent } from '../board/board';
 
 @Component({
   selector: 'app-task',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './task.html',
   styleUrl: './task.css',
 })
-export class Task {}
+export class Task {
+  boards: BoardComponent[] = [];
+}

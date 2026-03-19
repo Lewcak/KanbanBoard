@@ -1,0 +1,49 @@
+<div>
+    @if (board) {
+    <h1>{{ board.name }}</h1>
+    <button (click)="addingColumn = true">New Board</button>
+
+    @if (addingColumn === true) {
+    <input #columnName type="text" />
+    <button (click)="createColumn(columnName.value)">Save</button>
+    <button (click)="addingColumn = false">Cancel</button>
+    }
+    
+    @for (column of board.columns; track column.id) {
+    <div>
+        @if (editingColumnId === column.id) {
+        <input #editColumnName type="text" />
+        <button (click)="editColumn(column, editColumnName.value)">Save</button>
+        <button (click)="editingColumnId = null">Cancel</button>
+        } @else {
+        <h2>
+            {{ column.name }}
+            <button (click)="editingColumnId = column.id">Edit</button>
+            <button (click)="deleteColumn(column.id)">Delete</button>
+            <br>
+            <button (click)="addTaskToColumnId = column.id">New Task</button>
+        </h2>
+        }
+
+        @if (addTaskToColumnId === column.id) {
+        <input #taskName type="text" />
+        <button (click)="createTask(taskName.value)">Save</button>
+        <button (click)="addTaskToColumnId = null">Cancel</button>
+        }
+
+        @for (task of column.tasks; track task.id) {
+        @if (editingTaskId === task.id) {
+        <input #editTaskName type="text" placeholder="Task Name">
+        <button (click)="editTask(task, editTaskName.value)">Save</button>
+        <button (click)="editingTaskId = null">Cancel</button>
+        } @else {
+        {{ task.title }}
+        <button (click)="editingTaskId = task.id">Edit</button>
+        <button (click)="deleteTask(task.id)">Delete</button>
+        <br>
+        }
+        }
+    </div>
+    }
+    }
+</div>
